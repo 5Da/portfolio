@@ -1,3 +1,5 @@
+import { MeshDistortMaterial, OrbitControls, Sphere } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
 import React from 'react'
 import styled from 'styled-components'
 import { Navbar } from './Navbar';
@@ -90,6 +92,8 @@ const Right = styled.div`
         top: 0;
         bottom: 0;
         margin: auto;
+        z-index: 2;
+        /* opacity: 0.4; */
         animation: animate 2s infinite ease alternate;
 
         @keyframes animate {
@@ -115,6 +119,20 @@ export const Hero = () => {
             </Left>
             <Right>
                 <Img src="./img/moon.png"/>
+                <Canvas camera={{fov:25, position:[5,5,5]}}>
+                    <OrbitControls enableZoom={false}  />
+                    <ambientLight intensity={1}/>
+                    <directionalLight position={[3,2,1]}/>
+                    <Sphere args={[1,100,200]} scale={1.8}>
+                        <MeshDistortMaterial
+                            color="#0e9287"
+                            attach="material"
+                            distort={0.5}
+                            speed={2}
+                        />
+                    </Sphere>
+                    {/* <Cube/> */}
+                </Canvas>
             </Right>
         </Container>
     </Section>

@@ -1,13 +1,112 @@
 import React from 'react'
-import styled from 'styled-components';
+import styled from 'styled-components'
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls} from '@react-three/drei';
+import { Cube } from './Cube';
 
 const Section = styled.div`
-   height: 100vh;
-  scroll-snap-align: center;
+    height: 100vh;
+    scroll-snap-align: center;
+    display: flex;
+    justify-content: center;
+  `;
+
+const Container = styled.div`
+    height: 100vh;
+    scroll-snap-align: center;
+    /* width: 98%; */
+    width: 1250px;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    /* background-color: antiquewhite; */
+    /* gap: 200px; */
+    `;
+
+const Left = styled.div`
+    /* background-color: aliceblue; */
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    justify-content: center;
+    /* gap: 20px; */
+    /* left: 2%; */
+    `;
+
+const Title = styled.h1`
+    font-size: 74px;
 `;
+
+const WhatWeDo = styled.div`
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      `;
+
+const Line = styled.img`
+      /* overflow: hidden; */
+      height: 5px;
+      width: 20px;
+      /* background-color: aquamarine; */
+`;
+
+const Subtitle = styled.h2`
+      color: #c03da4;
+`;
+
+const Desc = styled.p`
+      font-size: 24px;
+      color: lightgray;
+`;
+
+const Button = styled.button`
+   background-color: #c03da4;
+   color: white;
+   font-weight: 500;
+   width: 120px;
+   padding: 10px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   `;
+
+
+const Right = styled.div`
+    position: relative;
+    flex: 1;
+    /* background-color: azure; */
+    /* justify-content: space-between; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    `;
+
 
 export const Who = () => {
   return (
-    <Section>Who</Section>
+    <Section>
+        <Container>
+            <Left>
+                {/* <Img src="./img/moon.png"/> */}
+                <Canvas camera={{fov:25, position:[5,5,5]}}>
+                    <OrbitControls enableZoom={false} autoRotate />
+                    <ambientLight intensity={1}/>
+                    <directionalLight position={[3,2,1]}/>
+                    <Cube/>
+                </Canvas>
+            </Left>
+            <Right>
+                <Title>Think outside the square space</Title>
+                <WhatWeDo>
+                    <Line src="./img/line.png"/>
+                    <Subtitle>Who we Are</Subtitle>
+                </WhatWeDo>
+                <Desc>a creative designer and developers with a position for the arts</Desc>
+                <Button>See our works</Button>
+            </Right>
+        </Container>
+    </Section>
   )
 }
